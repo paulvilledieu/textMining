@@ -1,7 +1,7 @@
 #include "tries.hh"
 
 // Iterative function to insert a key in the Trie
-void Trie::insert(std::string key)
+void Trie::insert(string key)
 {
     // start from root node
     Trie* curr = this;
@@ -10,10 +10,8 @@ void Trie::insert(std::string key)
         // create a new node if path doesn't exists
         if (curr->character[key[i]] == nullptr)
 	{
-	    std::cout << "key: " << (int)key[i] << "\n";
             curr->character[key[i]] = new Trie();
         }
-	std::cout << "next node\n";
         // go to next node
         curr = curr->character[key[i]];
     }
@@ -24,7 +22,7 @@ void Trie::insert(std::string key)
 
 // Iterative function to search a key in Trie. It returns true
 // if the key is found in the Trie, else it returns false
-bool Trie::search(std::string key)
+bool Trie::search(string key)
 {
     // return false if Trie is empty
     if (this == nullptr)
@@ -58,7 +56,7 @@ bool Trie::haveChildren(Trie const* curr)
 }
 
 // Recursive function to delete a key in the Trie
-bool Trie::deletion(Trie*& curr, std::string key)
+bool Trie::deletion(Trie*& curr, string key)
 {
     // return if Trie is empty
     if (curr == nullptr)
@@ -113,14 +111,14 @@ bool Trie::deletion(Trie*& curr, std::string key)
     return false;
 }
 
-void Trie::write_trie(std::ofstream& file, char c)
+void Trie::write_trie(ofstream& file, char c)
 {
     for (int i = 0; i < CHAR_SIZE; ++i)
     {
 	if (this->character[i] != nullptr)
         {
 	    char new_c = i;
-            file << "\"" << c << "\"" << " -> " << "\"" << new_c << "\"" << std::endl;
+            file << "\"" << c << "\"" << " -> " << "\"" << new_c << "\"" << endl;
             this->character[i]->write_trie(file, new_c);
 	}
     }
@@ -128,17 +126,17 @@ void Trie::write_trie(std::ofstream& file, char c)
 
 void Trie::print_trie()
 {
-    std::ofstream file;
+    ofstream file;
     
     file.open("graph.txt");
     if (file.bad())
         return;
 
-    file << "digraph G {" << std::endl;
+    file << "digraph G {" << endl;
     
     this->write_trie(file, '\0');
     
-    file << "}" << std::endl;
+    file << "}" << endl;
 
     file.close();
 }

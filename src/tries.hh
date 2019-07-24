@@ -4,9 +4,10 @@
 #include <iostream>
 #include <vector>
 #include <fstream> 
-
+#include <tuple>
 #define CHAR_SIZE 128
 
+using namespace std;
 
 class Trie {
 
