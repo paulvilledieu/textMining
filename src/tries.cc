@@ -12,15 +12,25 @@ Trie::Trie()
 
 Trie::Trie(string dictionary_file)
 {
-    fstream f(dictionary_file);
-    string s;
-    unsigned freq;
-    f >> s >> freq;
+    this->isLeaf = false;
+    this->character.resize(CHAR_SIZE);
+    for (int i = 0; i < CHAR_SIZE; i++)
+        this->character.push_back(nullptr);
 
-    while (!f.eof())
+    ifstream infile(dictionary_file);
+    string line;
+
+    while (getline(infile, line))
     {
+        istringstream iss(line);
+        string s;
+        unsigned freq;
+
+        if (!(iss >> s >> freq))
+	    break;
+
         this->insert(s);
-	f >> s >> freq;
+	cout << "added " << s << endl;
     }
 }
 

@@ -51,7 +51,6 @@ vector<tuple<string, int>> distance_rec(Trie* t, char c, string word, int max_di
     vector<tuple<string, int>> results;
     current_row.push_back(previous_row[0] + 1);
 
-    cout << "row: "<< current_row[0];
     for (int i = 1; i < column; ++i)
     {
 	int insert_dist = current_row[i - 1] + 1;
@@ -68,9 +67,7 @@ vector<tuple<string, int>> distance_rec(Trie* t, char c, string word, int max_di
 	dist.push_back(replace_dist);
 
 	current_row.push_back(min(dist));
-        cout << " " << current_row[i];
     }
-    cout << endl;
 
     if (current_row[current_row.size() - 1] <= max_dist && t->isLeaf)
     {

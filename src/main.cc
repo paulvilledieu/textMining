@@ -6,7 +6,7 @@ using namespace std;
 int main(int argc, char **argv)
 {
     cout << "Trie instantiation\n";
-    Trie *t = new Trie();
+    Trie *t = new Trie("/home/pierre-hugo/Documents/text-mining/src/test_words.txt");
 
     string s1 = "sunndd";
     cout << "Trie insertion: " << s1 << "\n";
