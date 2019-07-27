@@ -13,20 +13,17 @@ class Trie {
 
 public:
     bool isLeaf;
-    std::vector<Trie *> character;
-    Trie() {
-        this->isLeaf = false;
-    	this->character.resize(CHAR_SIZE);
-        for (int i = 0; i < CHAR_SIZE; i++)
-	    this->character.push_back(nullptr);
-    }
+    std::vector<Trie*> character;
+
+    Trie(string dictionary_file);
+    Trie();
 
     void insert(std::string);
     bool deletion(Trie*&, std::string);
+    bool haveChildren(Trie const*);
     bool search(std::string);
     void print_trie();
     void write_trie(std::ofstream& file, char c);
-    bool haveChildren(Trie const*);
 };
 
 

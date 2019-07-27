@@ -1,5 +1,30 @@
 #include "tries.hh"
 
+Trie::Trie()
+{
+    // int character_frequency[41] = ["e", "s", "a", "i", "r", "n", "t", "o", "u", "l", "c", "m", "p", "d", "v", "g", "h", "f", "0", "b", "2", "1", "q", "j", "x", "y", "3", "5", "7", "4", "6", "9", "w", "z", "k", "8", "_", ".", "+", "&", "#"];
+
+    this->isLeaf = false;
+    this->character.resize(CHAR_SIZE);
+    for (int i = 0; i < CHAR_SIZE; i++)
+        this->character.push_back(nullptr);
+}
+
+Trie::Trie(string dictionary_file)
+{
+    fstream f(dictionary_file);
+    string s;
+    unsigned freq;
+    f >> s >> freq;
+
+    while (!f.eof())
+    {
+        this->insert(s);
+	f >> s >> freq;
+    }
+}
+
+
 // Iterative function to insert a key in the Trie
 void Trie::insert(string key)
 {
