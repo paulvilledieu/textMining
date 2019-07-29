@@ -4,6 +4,7 @@ project(TextMining)
 
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS "-O0 -std=c++11")
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 include_directories("include/")
 
