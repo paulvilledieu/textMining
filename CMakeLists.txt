@@ -14,8 +14,8 @@ add_library(TextMining SHARED ${SRC_FILES} ${INCLUDE_FILES})
 
 include_directories(${PROJECT_SOURCE_DIR}/bin)
 
-add_executable(TextMiningCompiler bin/main.cc)
+add_executable(TextMiningCompiler bin/compiler.cc)
 target_link_libraries(TextMiningCompiler TextMining)
 
-add_executable(TextMiningApp bin/main.cc)
+add_executable(TextMiningApp bin/app.cc)
 target_link_libraries(TextMiningApp TextMining)
