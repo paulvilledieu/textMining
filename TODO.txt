@@ -1,0 +1,23 @@
+# Compilation               [ ]
+#------>Cmake               [ ]
+#------>2 binaries created  [ ]
+#
+# TextMiningCompiler        [ ]
+#------>Read input dict     [X]
+#------>Create Trie from it [X]
+#------>Trie serialization  [ ]
+#
+# TextMiningApp             [ ]
+#------>Read every input    [ ]
+#------>Compute levenshtein [X]
+#------>Sort the results    [ ]
+#------>Return in JSON      [ ]
+#
+# Constraints respected ?   [ ]
+#------>query per second    [ ]
+#------>less than 512Mo ram [ ]
+#
+# Comment all the code      [ ]
+#
+# Full Check of the project [ ]
+# (AUTHORS, README, code, ...)
