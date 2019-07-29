@@ -6,3 +6,6 @@ character_frequency.txt
 character_freq.py
 words.txt
 build
+TextMiningCompiler
+TextMiningApp
+run.sh
