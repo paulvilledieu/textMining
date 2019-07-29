@@ -6,7 +6,7 @@ LDFLAGS=-g
 all: src/main.o src/tries.o src/damerau_levenshtein.o
 	$(CXX) -o main src/main.o src/tries.o src/damerau_levenshtein.o
 
-SRCS=src/main.cc src/trie.cc
+SRCS=src/main.cc src/trie.cc src/damerau_levenshtein.cc
 
 OBJS=$(subst .cc,.o,$(SRCS))
 
