@@ -1,6 +1,7 @@
 # Compilation               [ ]
-#------>Cmake               [ ]
-#------>2 binaries created  [ ]
+#------>Cmake               [X]
+#------>2 binaries created  [X]
+#------>All files linked    [ ]
 #
 # TextMiningCompiler        [ ]
 #------>Read input dict     [X]
