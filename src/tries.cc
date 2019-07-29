@@ -10,11 +10,11 @@ Trie::Trie()
         this->character.push_back(nullptr);
 }
 
-Trie::Trie(string dictionary_file)
+Trie::Trie(const string& dictionary_file)
 {
     this->isLeaf = false;
     this->character.resize(CHAR_SIZE);
-    for (int i = 0; i < CHAR_SIZE; i++)
+    for (unsigned i = 0; i < CHAR_SIZE; i++)
         this->character.push_back(nullptr);
 
     ifstream infile(dictionary_file);
@@ -36,53 +36,53 @@ Trie::Trie(string dictionary_file)
 
 
 // Iterative function to insert a key in the Trie
-void Trie::insert(string key)
+void Trie::insert(const string& word)
 {
     // start from root node
     Trie* curr = this;
-    for (int i = 0; i < key.length(); i++)
+    for (unsigned i = 0; i < word.length(); i++)
     {
-        // create a new node if path doesn't exists
-        if (curr->character[key[i]] == nullptr)
-	{
-            curr->character[key[i]] = new Trie();
-        }
-        // go to next node
-        curr = curr->character[key[i]];
+        // create a new node if the path doesn't exist
+        if (curr->character[word[i]] == nullptr)
+            curr->character[word[i]] = new Trie();
+        
+	// go to the next node
+        curr = curr->character[word[i]];
     }
 
-    // mark current node as leaf
+    // mark the current node as leaf
     curr->isLeaf = true;
 }
 
-// Iterative function to search a key in Trie. It returns true
-// if the key is found in the Trie, else it returns false
-bool Trie::search(string key)
+// Iterative function to search a key in Trie
+// It returns true if the word is found in the Trie, otherwise false
+bool Trie::search(const string& word)
 {
-    // return false if Trie is empty
+    // return false if the Trie is empty
     if (this == nullptr)
         return false;
 
+    // start from the root
     Trie* curr = this;
-    for (int i = 0; i < key.length(); i++)
+    for (unsigned i = 0; i < word.length(); i++)
     {
-        // go to next node
-        curr = curr->character[key[i]];
+        // go to the next node
+        curr = curr->character[word[i]];
 
-        // if string is invalid (reached end of path in Trie)
+        // if the string is invalid (reached end of path in Trie)
         if (curr == nullptr)
             return false;
     }
 
-    // if current node is a leaf and we have reached the
-    // end of the string, return true
+    // if the current node is a leaf and we have reached the
+    // end of the string, return true otherwise false
     return curr->isLeaf;
 }
 
-// returns true if given node has any children
-bool Trie::haveChildren(Trie const* curr)
+// returns true if the given node has any children
+bool Trie::haveChildren(const Trie* curr)
 {
-    for (int i = 0; i < CHAR_SIZE; i++)
+    for (unsigned i = 0; i < CHAR_SIZE; i++)
         if (curr->character[i])
             return true;
             // child found
@@ -91,21 +91,21 @@ bool Trie::haveChildren(Trie const* curr)
 }
 
 // Recursive function to delete a key in the Trie
-bool Trie::deletion(Trie*& curr, string key)
+bool Trie::deletion(Trie*& curr, const string& word)
 {
-    // return if Trie is empty
+    // return if the Trie is empty
     if (curr == nullptr)
         return false;
 
     // if we have not reached the end of the key
-    if (key.length())
+    if (word.length())
     {
-        // recur for the node corresponding to next character in the key
-        // and if it returns true, delete current node (if it is non-leaf)
+        // call deletion for the node corresponding to next character in the key
+        // and if it returns true, delete the current node (if it is non-leaf)
 
         if (curr != nullptr &&
-            curr->character[key[0]] != nullptr &&
-            deletion(curr->character[key[0]], key.substr(1)) &&
+            curr->character[word[0]] != nullptr &&
+            deletion(curr->character[word[0]], word.substr(1)) &&
             curr->isLeaf == false)
         {
             if (!haveChildren(curr))
@@ -115,15 +115,13 @@ bool Trie::deletion(Trie*& curr, string key)
                 return true;
             }
             else
-            {
                 return false;
-            }
         }
     }
 
-    // if we have reached the end of the key
-    if (key.length() == 0 && curr->isLeaf) {
-        // if current node is a leaf node and don't have any children
+    // if we have reached the end of the word
+    if (word.length() == 0 && curr->isLeaf) {
+        // if the current node is a leaf node and doesn't have any children
         if (!haveChildren(curr)) {
             // delete current node
             delete curr;
@@ -133,7 +131,7 @@ bool Trie::deletion(Trie*& curr, string key)
             return true;
         }
 
-        // if current node is a leaf node and have children
+        // if the current node is a leaf node and have children
         else {
             // mark current node as non-leaf node (DON'T DELETE IT)
             curr->isLeaf = false;
@@ -148,7 +146,7 @@ bool Trie::deletion(Trie*& curr, string key)
 
 void Trie::write_trie(ofstream& file, char c)
 {
-    for (int i = 0; i < CHAR_SIZE; ++i)
+    for (unsigned i = 0; i < CHAR_SIZE; ++i)
     {
 	if (this->character[i] != nullptr)
         {

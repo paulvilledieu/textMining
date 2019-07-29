@@ -2,5 +2,6 @@
 
 using namespace std;
 
-vector<tuple<string, int>> distance_dl(Trie* t, string word, int max_dist);
-vector<tuple<string, int>> distance_rec(Trie* t, char c, string word, int max_dist, vector<int> previous_row, string current_word);
+vector<tuple<string, unsigned>> distance_dl(Trie*& t, const string& word, unsigned max_dist);
+vector<tuple<string, unsigned>> distance_rec(Trie* t, char c, const string& word,
+		unsigned max_dist, vector<unsigned> previous_row, string current_word);

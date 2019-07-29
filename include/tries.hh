@@ -16,15 +16,15 @@ public:
     bool isLeaf;
     std::vector<Trie*> character;
 
-    Trie(string dictionary_file);
+    Trie(const string& dictionary_file);
     Trie();
 
-    void insert(std::string);
-    bool deletion(Trie*&, std::string);
-    bool haveChildren(Trie const*);
-    bool search(std::string);
+    void insert(const string& word);
+    bool deletion(Trie*&, const string& word);
+    bool haveChildren(const Trie*);
+    bool search(const string&);
     void print_trie();
-    void write_trie(std::ofstream& file, char c);
+    void write_trie(ofstream& file, char c);
 };
 
 
