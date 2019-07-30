@@ -173,3 +173,35 @@ void Trie::print_trie()
 
     file.close();
 }
+
+void Trie::serialize(Trie *&curr, FILE *fp, char key)
+{
+    // Base case 
+    if (curr == nullptr) return; 
+  
+    // Else, store current node and recur for its children 
+    fprintf(fp, "%c ", key); 
+    for (auto& child : curr->character)
+         get<0>(child)->serialize(child, fp, get<1>(child)); 
+  
+    // Store marker at the end of children 
+    fprintf(fp, "%c ", ')'); 
+}
+
+int deserialize(Trie *&curr, FILE *fp) 
+{ 
+    // Read next item from file. If theere are no more items or next 
+    // item is marker, then return 1 to indicate same 
+    char key; 
+    if ( !fscanf(fp, "%c ", &key) || key == ')' ) 
+       return 1; 
+  
+    // Else create node with this item and recur for children 
+    auto child = make_tuple(new Trie(), key); 
+    for (auto& child : curr->character)
+      if (get<0>(child)->deserialize(get<0>(child), fp)) 
+         break; 
+  
+    // Finally return 0 for successful finish 
+    return 0; 
+} 

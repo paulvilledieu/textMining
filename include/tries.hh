@@ -2,6 +2,7 @@
 #define TRIES_H
 
 #include <iostream>
+#include<cstdio> 
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -25,6 +26,8 @@ public:
     bool search(const string&);
     void print_trie();
     void write_trie(ofstream& file, char c);
+    void serialize(Trie *&curr, FILE *fp, char key);
+    int deserialize(Trie *&curr, FILE *fp);
 };
 
 
