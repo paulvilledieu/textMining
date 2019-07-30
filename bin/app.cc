@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     unsigned dist;
     cin >> approx >> dist >> word;
     vector<string> final_res;
-    vector<tuple<string, unsigned>> res = distance_dl(trie, word, dist);
+    vector<tuple<string, unsigned, unsigned>> res = distance_dl(trie, word, dist);
     for (auto r : res)
     {
         string s = "";
