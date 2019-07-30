@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <tuple>
+#include <algorithm>
 #define CHAR_SIZE 128
 
 using namespace std;
@@ -14,15 +15,14 @@ using namespace std;
 class Trie {
 
 public:
-    bool isLeaf;
-    std::vector<Trie*> character;
+    bool isWord;
+    std::vector<tuple<Trie*, char>> character;
+    unsigned freq;
 
     Trie(const string& dictionary_file);
     Trie();
 
-    void insert(const string& word);
-    bool deletion(Trie*&, const string& word);
-    bool haveChildren(const Trie*);
+    void insert(const string& word, const unsigned& freq);
     bool search(const string&);
     void print_trie();
     void write_trie(ofstream& file, char c);
