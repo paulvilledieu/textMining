@@ -3,15 +3,15 @@
 #------>2 binaries created  [X]
 #------>All files linked    [ ]
 #
-# TextMiningCompiler        [ ]
+# TextMiningCompiler        [/]
 #------>Read input dict     [X]
 #------>Create Trie from it [X]
-#------>Trie serialization  [ ]
+#------>Trie serialization  [/]
 #
 # TextMiningApp             [ ]
 #------>Read every input    [ ]
 #------>Compute levenshtein [X]
-#------>Sort the results    [ ]
+#------>Sort the results    [X]
 #------>Return in JSON      [ ]
 #
 # Constraints respected ?   [ ]
