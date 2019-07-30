@@ -48,7 +48,7 @@ int main(int argc, char **argv)
         if (final_res.size() != 0) {
             s += ",";
         }
-        s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + get<2>(r) + ",\"distance\":" +  get<1>(r) + "}";
+        s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + to_string(get<2>(r)) + ",\"distance\":" +  to_string(get<1>(r)) + "}";
         final_res.push_back(s);
     }
     while (!cin.eof())
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
             if (final_res.size() != 0) {
                 s += ",";
             }
-            s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + get<2>(r) + ",\"distance\":" +  get<1>(r) + "}";
+            s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + to_string(get<2>(r)) + ",\"distance\":" +  to_string(get<1>(r)) + "}";
             final_res.push_back(s);
         }
     }

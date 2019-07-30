@@ -135,7 +135,7 @@ void Trie::serialize(Trie *&curr, FILE *fp, char key)
     fprintf(fp, "%c ", ')'); 
 }
 
-int deserialize(Trie *&curr, FILE *fp) 
+int Trie::deserialize(Trie *&curr, FILE *fp) 
 { 
     // Read next item from file. If theere are no more items or next 
     // item is marker, then return 1 to indicate same 
