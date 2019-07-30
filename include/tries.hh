@@ -27,7 +27,7 @@ public:
     void print_trie();
     void write_trie(ofstream& file, char c);
     void serialize(FILE *fp, char key);
-    int deserialize(Trie *&curr, FILE *fp);
+    int deserialize(FILE *fp);
 };
 
 

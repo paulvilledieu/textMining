@@ -33,7 +33,8 @@ int main(int argc, char **argv)
         return 0; 
     } 
     auto trie = new Trie(false, 0);
-    trie->deserialize(trie, fp);
+    trie->deserialize(fp);
+    trie->print_trie();
     fclose(fp); 
     // -----------------------------
 
@@ -42,6 +43,7 @@ int main(int argc, char **argv)
     cin >> approx >> dist >> word;
     vector<string> final_res;
     vector<tuple<string, unsigned, unsigned>> res = distance_dl(trie, word, dist);
+    cerr << trie->character.size();
     for (auto r : res)
     {
         string s = "";
