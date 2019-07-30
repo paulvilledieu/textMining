@@ -26,7 +26,6 @@ Trie::Trie(const string& dictionary_file)
 	    break;
 
         this->insert(s, freq);
-        cerr << "ISWORD !!!!!!!!! " << get<0>(this->character[0])->isWord << endl;
     }
 }
 
@@ -38,7 +37,6 @@ void Trie::insert(const string& word, const unsigned& freq)
     Trie* curr = this;
     for (unsigned i = 0; i < word.length(); i++)
     {
-	cerr << word << " supposed to be inserted\n";
         // create a new node if the path doesn't exist
 	char tmp = word[i];
 	vector<tuple<Trie*, char>>::iterator it = find_if(curr->character.begin(), curr->character.end(), [&tmp](const tuple<Trie*, char>& val){
@@ -49,19 +47,14 @@ void Trie::insert(const string& word, const unsigned& freq)
         if (curr->character.end() == it)
 	{
             curr->character.push_back(make_tuple(new Trie(false, 0), tmp));
-	    cerr << "created  " << get<1>(curr->character[curr->character.size() - 1]) << endl;
 	    curr = get<0>(curr->character[curr->character.size() - 1]);
 	}
 	else
-        {
             // go to the next node
-	    //cerr << "already there  " << get<1>(*it) << endl;
             curr = get<0>(*it);
-	}
     }
 
     // mark the current node as a word
-    cerr << word << " inserted\n";
     curr->isWord = true;
     curr->freq = freq;
 }
