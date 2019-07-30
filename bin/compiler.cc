@@ -15,8 +15,11 @@ int main(int argc, char **argv)
     cerr << "dict_name_out: " << dict_name_out << endl;
     
     cerr << "Trie instantiation\n";
-    
+
     Trie* t = new Trie(dict_name_in);
+    vector<tuple<string, unsigned, unsigned>> res = distance_dl(t, "myfox", 0);
+    for (auto& elt: res)
+        cerr << get<0>(elt) << endl;
     FILE *fp = fopen(argv[2], "w"); 
     t->serialize(fp, '\0');
     fclose(fp); 
