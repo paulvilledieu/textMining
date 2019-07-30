@@ -14,30 +14,12 @@ int main(int argc, char **argv)
     cerr << "dict_name_in: " << dict_name_in << endl;
     cerr << "dict_name_out: " << dict_name_out << endl;
     
-    const string& path = "/home/pierre-hugo/Documents/text-mining/src/test_words.txt";
     cerr << "Trie instantiation\n";
-    Trie* t = new Trie(path);
-
-    const string s1 = "sunndd";
-    t->insert(s1, 2);
-
-    const string s2 = "satunday";
-    t->insert(s2, 3);
-
-    const string s3 = "sunday";
-    cerr << "Trie distance for the word: " << s3 << "\n";
     
-    vector<tuple<string, unsigned, unsigned>> distances = distance_dl(t, s3, 2);
-    cerr << "results size: " << distances.size() << endl;
-    
-    for (unsigned i = 0; i < distances.size(); ++i)
-        cerr << get<0>(distances[i]) << "! \n";
-
-    cerr << "Trie search for " << "me\n";
-    cerr << t->search("me") << "\n";
-
-    cerr << "Trie displayed\n";
-    t->print_trie();
-
+    Trie* t = new Trie(dict_name_in);
+    FILE *fp = fopen(argv[2], "w"); 
+    t->serialize(fp, '\0');
+    fclose(fp); 
+    cerr << "Trie serialized\n";
     return 0;
 }

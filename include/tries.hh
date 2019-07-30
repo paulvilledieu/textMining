@@ -26,7 +26,7 @@ public:
     bool search(const string&);
     void print_trie();
     void write_trie(ofstream& file, char c);
-    void serialize(Trie *&curr, FILE *fp, char key);
+    void serialize(FILE *fp, char key);
     int deserialize(Trie *&curr, FILE *fp);
 };
 

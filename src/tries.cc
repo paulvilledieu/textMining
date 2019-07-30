@@ -121,26 +121,27 @@ void Trie::print_trie()
     file.close();
 }
 
-void Trie::serialize(Trie *&curr, FILE *fp, char key)
+void Trie::serialize(FILE *fp, char key)
 {
     // Base case 
-    if (curr == nullptr) return; 
+    if (this == nullptr) return; 
   
     // Else, store current node and recur for its children 
-    fprintf(fp, "%c ", key); 
-    for (auto& child : curr->character)
-         get<0>(child)->serialize(get<0>(child), fp, get<1>(child)); 
+    fprintf(fp, "%c%u", key, this->freq); 
+    for (auto& child : this->character)
+         get<0>(child)->serialize(fp, get<1>(child)); 
   
     // Store marker at the end of children 
-    fprintf(fp, "%c ", ')'); 
+    fprintf(fp, "%c%u", ')', 0); 
 }
 
 int Trie::deserialize(Trie *&curr, FILE *fp) 
 { 
     // Read next item from file. If theere are no more items or next 
     // item is marker, then return 1 to indicate same 
-    char key; 
-    if ( !fscanf(fp, "%c ", &key) || key == ')' ) 
+    char key;
+    unsigned freq;
+    if ( !fscanf(fp, "%c%u", &key, &freq) || key == ')' ) 
        return 1; 
   
     // Else create node with this item and recur for children 
