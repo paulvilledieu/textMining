@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     cerr << "Trie instantiation\n";
 
     Trie* t = new Trie(dict_name_in);
-    vector<tuple<string, unsigned, unsigned>> res = distance_dl(t, "myfox", 0);
+    vector<tuple<string, unsigned, unsigned>> res = distance_dl(t, "myfox", 3);
     for (auto& elt: res)
         cerr << get<0>(elt) << endl;
     FILE *fp = fopen(argv[2], "w"); 

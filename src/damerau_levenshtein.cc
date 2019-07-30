@@ -38,13 +38,35 @@ vector<tuple<string, unsigned, unsigned>> distance_dl(Trie*& t, const string& wo
         current_word += get<1>(t->character[i]);
 	merge_vectors(results, distance_rec(get<0>(t->character[i]), get<1>(t->character[i]), word, max_dist, current_row, current_word));
     }
+    auto sortRuleLambda = [] (tuple<string, unsigned, unsigned> const& s1, tuple<string, unsigned, unsigned> const& s2) -> bool
+    {
+        if (get<1>(s1) < get<1>(s2))
+            return true;
+        else if (get<1>(s1) > get<1>(s2))
+       	    return false;
+        else
+        {
+            if (get<2>(s1) > get<2>(s2))
+                return true;
+            else if (get<2>(s1) < get<2>(s2))
+       	        return false;
+            else
+            {
+                if (get<0>(s1) < get<0>(s2))
+                    return true;
+		else
+       	            return false;
+            }
+        }
+    };
+    sort(results.begin(), results.end(), sortRuleLambda);
     return results;
 }
 
 
 vector<tuple<string, unsigned, unsigned>> distance_rec(Trie* t, char c, const string& word, unsigned max_dist, vector<unsigned> previous_row, string current_word)
 {
-    cerr << "letter :" << c << " and current word: " << current_word << " && isWord = " << t->isWord<< endl;
+    //cerr << "letter :" << c << " and current word: " << current_word << " && isWord = " << t->isWord<< endl;
     int column = word.length() + 1;
     vector<unsigned> current_row;
     vector<tuple<string, unsigned, unsigned>> results;
