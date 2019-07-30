@@ -1,6 +1,6 @@
 #include "tries.hh"
 
-Trie::Trie()
+Trie::Trie(bool isWord, unsigned freq)
 {
     // int character_frequency[41] = ["e", "s", "a", "i", "r", "n", "t", "o", "u", "l", "c", "m", "p", "d", "v", "g", "h", "f", "0", "b", "2", "1", "q", "j", "x", "y", "3", "5", "7", "4", "6", "9", "w", "z", "k", "8", "_", ".", "+", "&", "#"];
 
@@ -48,7 +48,7 @@ void Trie::insert(const string& word, const unsigned& freq)
 	});
         if (curr->character.end() == it)
 	{
-            curr->character.push_back(make_tuple(new Trie(), tmp));
+            curr->character.push_back(make_tuple(new Trie(false, 0), tmp));
 	    cerr << "created  " << get<1>(curr->character[curr->character.size() - 1]) << endl;
 	    curr = get<0>(curr->character[curr->character.size() - 1]);
 	}
@@ -145,7 +145,7 @@ int Trie::deserialize(Trie *&curr, FILE *fp)
        return 1; 
   
     // Else create node with this item and recur for children 
-    auto child = make_tuple(new Trie(), key); 
+    auto child = make_tuple(new Trie(freq != 0, freq), key); 
     for (auto& child : curr->character)
       if (get<0>(child)->deserialize(get<0>(child), fp)) 
          break; 

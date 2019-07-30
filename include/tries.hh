@@ -20,7 +20,7 @@ public:
     unsigned freq;
 
     Trie(const string& dictionary_file);
-    Trie();
+    Trie(bool isWord, unsigned freq);
 
     void insert(const string& word, const unsigned& freq);
     bool search(const string&);

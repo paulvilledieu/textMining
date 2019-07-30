@@ -32,7 +32,7 @@ int main(int argc, char **argv)
         puts("Could not open file"); 
         return 0; 
     } 
-    auto trie = new Trie();
+    auto trie = new Trie(false, 0);
     trie->deserialize(trie, fp);
     fclose(fp); 
     // -----------------------------
