@@ -129,7 +129,7 @@ void Trie::serialize(Trie *&curr, FILE *fp, char key)
     // Else, store current node and recur for its children 
     fprintf(fp, "%c ", key); 
     for (auto& child : curr->character)
-         get<0>(child)->serialize(child, fp, get<1>(child)); 
+         get<0>(child)->serialize(get<0>(child), fp, get<1>(child)); 
   
     // Store marker at the end of children 
     fprintf(fp, "%c ", ')'); 
