@@ -4,6 +4,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "tries.hh"
+#include "damerau_levenshtein.hh"
 
 using namespace std;
 
@@ -23,16 +25,53 @@ int main(int argc, char **argv)
 
     void* addr = mmap(NULL, sb.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
 
-    string approx, dist, word;
-    cin >> approx >> dist >> word;
-    cerr << word << "\n";
+    // -----------------------------
+    FILE *fp = fopen(argv[1], "r"); 
+    if (fp == NULL) 
+    { 
+        puts("Could not open file"); 
+        return 0; 
+    } 
+    auto trie = new Trie();
+    trie->deserialize(trie, fp);
+    fclose(fp); 
+    // -----------------------------
 
+    string approx, word;
+    unsigned dist;
+    cin >> approx >> dist >> word;
+    vector<string> final_res;
+    vector<tuple<string, unsigned>> res = distance_dl(trie, word, dist);
+    for (auto r : res)
+    {
+        string s = "";
+        if (final_res.size() != 0) {
+            s += ",";
+        }
+        s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + get<2>(r) + ",\"distance\":" +  get<1>(r) + "}";
+        final_res.push_back(s);
+    }
     while (!cin.eof())
     {
       cin >> approx >> dist >> word;
-      cerr << word << "\n";
+      res = distance_dl(trie, word, dist);
+        for (auto r : res)
+        {
+            string s = "";
+            if (final_res.size() != 0) {
+                s += ",";
+            }
+            s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + get<2>(r) + ",\"distance\":" +  get<1>(r) + "}";
+            final_res.push_back(s);
+        }
     }
-
+    
+    cout << '[';
+    for (auto r : final_res) {
+        cout << r;
+    }
+    cout << ']' << endl;
+    
     munmap(addr, sb.st_size);
     close(fd);
     return 0;
