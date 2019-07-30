@@ -139,8 +139,7 @@ int Trie::deserialize(FILE *fp)
     // item is marker, then return 1 to indicate same 
     char key;
     unsigned freq;
-    while (!(!fscanf(fp, "%c%u", &key, &freq) || key == ')')) {
-        cerr << key;
+    while (fscanf(fp, "%c%u", &key, &freq) != EOF && key != ')' && key != '\n') {
         // Else create node with this item and recur for children 
         this->character.push_back(make_tuple(new Trie(freq != 0, freq), key)); 
         get<0>(this->character[this->character.size() - 1])->deserialize(fp);
