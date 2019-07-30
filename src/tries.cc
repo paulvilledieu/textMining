@@ -46,7 +46,7 @@ void Trie::insert(const string& word, const unsigned& freq)
 	        return true;
 	    return false; 
 	});
-        if (this->character.end() == it)
+        if (curr->character.end() == it)
 	{
             curr->character.push_back(make_tuple(new Trie(), tmp));
 	    cerr << "created  " << get<1>(curr->character[curr->character.size() - 1]) << endl;
@@ -80,7 +80,7 @@ bool Trie::search(const string& word)
 	        return true;
 	    return false; 
 	});
-        if (this->character.end() == it)
+        if (curr->character.end() == it)
 	    return false;
 
         // go to the next node
