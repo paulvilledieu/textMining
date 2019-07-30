@@ -5,7 +5,12 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-
+    if (argc < 3)
+        return -1;
+    const string& dict_name_out = argv[2];
+    const string& dict_name_in = argv[1];
+    cout << "dict_name_in: " << dict_name_in << endl;
+    cout << "dict_name_out: " << dict_name_out << endl;
     const string& path = "/home/pierre-hugo/Documents/text-mining/src/test_words.txt";
     cout << "Trie instantiation\n";
     Trie* t = new Trie(path);
