@@ -22,5 +22,5 @@
 #
 # Comment all the code      [X]
 #
-# Full Check of the project [ ]
+# Full Check of the project [X]
 # (AUTHORS, README, code, ...)

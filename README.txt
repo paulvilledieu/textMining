@@ -5,13 +5,19 @@ In order to run the code:
 	$ mkdir build && cd build && cmake ..
 	$ make
 
-To lauch the tests suite (at the root of the repo):
+To execute the tests suite (at the root of the repo):
 	$ test/test.sh
 
-QUESTIONS:
-	1 - 
 
-	2 - Nous avons créé une tests suite comprenant des tests sur le mot testé, la distance et aussi sur le mode d'entrée des tests (echo, cat , ...)
+Notre programme fonctionne sur la majorité des tests, les seuls problèmes que nous avons rencontrés sont certaines lectures sur stdin.
+Comme par exemple la redirection d'un fichier avec cat, dans notre programme produit un comportement indéfini la plupart du temps.
+
+
+QUESTIONS:
+
+	1 - On a décidé de créer une classe Trie pour faciliter l'utilisation des méthodes sur notre structures de données. On a aussi crée un fichier qui contient les algorithmes pour calculer des distances sur notre Trie. Enfin on a stocké les deux mains pour créer les deux binaires dans un dossier bin pour le séparer de notre logique.
+
+	2 - Nous avons créé une tests suite comprenant des tests sur le mot testé, la distance et aussi sur le mode d'entrée des tests (echo, cat, ...)
 	
 	3 - Non
 	
@@ -26,4 +32,5 @@ QUESTIONS:
 		Ensuite, nous pourrions nettement améliorer nos performances de (dé)serialisation en utilisant des transformation de Trie vers des structures de type
 		Judy Array par exemple. Cela améliorerait d'une part la rapidité de notre programme, mais aussi la mémoire utilisée par celui-ci. 
 	
-	7 -
+	7 - Il faudrait que l'on prenne en compte le contexte avec par exemple des algorithmes de reinforcement learning ou des N-grams embedding.
+	https://arxiv.org/pdf/1710.07045v1.pdf
