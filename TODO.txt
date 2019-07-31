@@ -1,18 +1,18 @@
-# Compilation               [ ]
+# Compilation               [X]
 #------>Cmake               [X]
 #------>2 binaries created  [X]
-#------>All files linked    [ ]
+#------>All files linked    [X]
 #
 # TextMiningCompiler        [/]
 #------>Read input dict     [X]
 #------>Create Trie from it [X]
 #------>Trie serialization  [/]
 #
-# TextMiningApp             [ ]
-#------>Read every input    [ ]
+# TextMiningApp             [X]
+#------>Read every input    [X]
 #------>Compute levenshtein [X]
 #------>Sort the results    [X]
-#------>Return in JSON      [ ]
+#------>Return in JSON      [X]
 #
 # Constraints respected ?   [ ]
 #------>query per second    [ ]
