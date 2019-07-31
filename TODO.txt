@@ -3,10 +3,10 @@
 #------>2 binaries created  [X]
 #------>All files linked    [X]
 #
-# TextMiningCompiler        [/]
+# TextMiningCompiler        [X]
 #------>Read input dict     [X]
 #------>Create Trie from it [X]
-#------>Trie serialization  [/]
+#------>Trie serialization  [X]
 #
 # TextMiningApp             [X]
 #------>Read every input    [X]
@@ -17,6 +17,8 @@
 # Constraints respected ?   [ ]
 #------>query per second    [ ]
 #------>less than 512Mo ram [ ]
+#
+# Tests suite               [X]
 #
 # Comment all the code      [ ]
 #

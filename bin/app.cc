@@ -30,7 +30,7 @@ int main(int argc, char **argv)
     /* The final JSON */
     vector<string> final_res;
     /* The results for each query */
-    vector<tuple<string, unsigned, unsigned>> res;
+    vector<tuple<string, unsigned short, unsigned>> res;
     /* Loop for each query */
     while (!cin.eof())
     {

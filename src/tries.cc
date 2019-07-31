@@ -1,18 +1,24 @@
 #include "tries.hh"
 
+
+// Constructor for the deserialization
 Trie::Trie(bool isWord, unsigned freq)
 {
+    // Character sorted from the highest frequency to the lowest one
     // int character_frequency[41] = ["e", "s", "a", "i", "r", "n", "t", "o", "u", "l", "c", "m", "p", "d", "v", "g", "h", "f", "0", "b", "2", "1", "q", "j", "x", "y", "3", "5", "7", "4", "6", "9", "w", "z", "k", "8", "_", ".", "+", "&", "#"];
 
     this->isWord = isWord;
     this->freq = freq;
 }
 
+
+// Constructor for the serialization part, read from the dictionary file
 Trie::Trie(const string& dictionary_file)
 {
     this->isWord = false;
     this->freq = 0;
 
+    // Read from the file
     ifstream infile(dictionary_file);
     string line;
 
@@ -25,6 +31,7 @@ Trie::Trie(const string& dictionary_file)
         if (!(iss >> s >> freq))
 	    break;
 
+	// Call insert function for every word and frequency parsed
         this->insert(s, freq);
     }
 }
@@ -33,12 +40,14 @@ Trie::Trie(const string& dictionary_file)
 // Iterative function to insert a key in the Trie
 void Trie::insert(const string& word, const unsigned& freq)
 {
-    // start from root node
+    // start from the root node
     Trie* curr = this;
-    for (unsigned i = 0; i < word.length(); i++)
+
+    // Iterate on the word we want to insert
+    for (unsigned short i = 0; i < word.length(); i++)
     {
-        // create a new node if the path doesn't exist
 	char tmp = word[i];
+	// Check if the current letter is in the Trie
 	vector<tuple<Trie*, char>>::iterator it = find_if(curr->character.begin(), curr->character.end(), [&tmp](const tuple<Trie*, char>& val){
 	    if (get<1>(val) == tmp)
 	        return true;
@@ -46,18 +55,20 @@ void Trie::insert(const string& word, const unsigned& freq)
 	});
         if (curr->character.end() == it)
 	{
+            // Create a new node if the path doesn't exist
             curr->character.push_back(make_tuple(new Trie(false, 0), tmp));
 	    curr = get<0>(curr->character[curr->character.size() - 1]);
 	}
 	else
-            // go to the next node
+            // Go to the next node if it already exists
             curr = get<0>(*it);
     }
 
-    // mark the current node as a word
+    // Mark the current node as a word
     curr->isWord = true;
     curr->freq = freq;
 }
+
 
 // Iterative function to search a key in Trie
 // It returns true if the word is found in the Trie, otherwise false
@@ -65,31 +76,34 @@ bool Trie::search(const string& word)
 {
     // start from the root
     Trie* curr = this;
-    for (unsigned i = 0; i < word.length(); i++)
+    for (unsigned short i = 0; i < word.length(); i++)
     {
 	char tmp = word[i];
+	// Check if the current letter is in the Trie
         vector<tuple<Trie*, char>>::iterator it = find_if(curr->character.begin(), curr->character.end(), [&tmp](const tuple<Trie*, char>& val){
 	    if (get<1>(val) == tmp)
 	        return true;
 	    return false; 
 	});
+	// If it is not return false
         if (curr->character.end() == it)
 	    return false;
 
-        // go to the next node
+        // Go to the next node
         curr = get<0>(*it);
 
-        // if the string is invalid (reached end of path in Trie)
     }
 
-    // if the current node is a word and we have reached the
+    // If the current node is a word and we have reached the
     // end of the string, return true otherwise false
     return curr->isWord;
 }
 
+
+// Simple function to write line per line the Trie in a file
 void Trie::write_trie(ofstream& file, char c)
 {
-    for (unsigned i = 0; i < this->character.size(); ++i)
+    for (unsigned short i = 0; i < this->character.size(); ++i)
     {
 	char new_c = get<1>(this->character[i]);
         file << "\"" << c << "\"" << " -> " << "\"" << new_c << "\"" << endl;
@@ -97,11 +111,14 @@ void Trie::write_trie(ofstream& file, char c)
     }
 }
 
+
+// Method to display the Trie in a file, can be read with WebGraphViz
 void Trie::print_trie()
 {
     ofstream file;
     
     file.open("graph.txt");
+    // Check if the file did not open correctly
     if (file.bad())
         return;
 
@@ -113,6 +130,7 @@ void Trie::print_trie()
 
     file.close();
 }
+
 
 /* Dump the Trie into a file */
 void Trie::serialize(FILE *fp, char key)
