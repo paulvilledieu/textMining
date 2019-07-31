@@ -118,12 +118,12 @@ void Trie::serialize(FILE *fp, char key)
 {
     // Else, store current node and recur for its children
     if (key != '\0')
-        fprintf(fp, "%c%u", key, this->freq); 
+        fprintf(fp, "%c-%u ", key, this->freq); 
     for (auto& child : this->character)
          get<0>(child)->serialize(fp, get<1>(child)); 
   
     // Store marker at the end of children 
-    fprintf(fp, "%c%u", ')', 0); 
+    fprintf(fp, "%c-%u ", ')', 0); 
 }
 
 int Trie::deserialize(FILE *fp) 
@@ -132,7 +132,7 @@ int Trie::deserialize(FILE *fp)
     // item is marker, then return 1 to indicate same 
     char key;
     unsigned freq;
-    while (fscanf(fp, "%c%u", &key, &freq) != EOF && key != ')' && key != '\n') {
+    while (fscanf(fp, "%c-%u ", &key, &freq) != EOF && key != ')' && key != '\n') {
         // Else create node with this item and recur for children 
         this->character.push_back(make_tuple(new Trie(freq != 0, freq), key)); 
         get<0>(this->character[this->character.size() - 1])->deserialize(fp);

@@ -34,7 +34,6 @@ int main(int argc, char **argv)
     } 
     auto trie = new Trie(false, 0);
     trie->deserialize(fp);
-    trie->print_trie();
     fclose(fp); 
     // -----------------------------
 
@@ -44,7 +43,6 @@ int main(int argc, char **argv)
     vector<tuple<string, unsigned, unsigned>> res;
     while (!cin.eof())
     {
-        cerr << approx << " " << dist << " " << word << endl;
         res = distance_dl(trie, word, atoi(dist.c_str()));
         for (auto r : res)
         {
