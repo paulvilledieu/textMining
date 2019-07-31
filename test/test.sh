@@ -111,9 +111,9 @@ test_total=$((test_total + 1))
 printf '\n'
 
 echo "========== TEST $test_total =========="
-cm1='approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test"'
+cm1='echo "approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test"'
 echo "=> $cm1"
-if diff <(approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test" | ref/TextMiningApp ref/dict.bin 2> /dev/null) <(approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test" | ./TextMiningApp dict.bin 2> /dev/null) 
+if diff <(echo "approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test" | ref/TextMiningApp ref/dict.bin 2> /dev/null) <(echo "approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test" | ./TextMiningApp dict.bin 2> /dev/null) 
 then
     test_done=$((test_done + 1))
     echo "[OK]"
@@ -139,7 +139,7 @@ printf '\n'
 echo "========== TEST $test_total =========="
 cm1='cat test/test.txt'
 echo "=> $cm1"
-if diff <(cat test/test.txt | ref/TextMiningApp ref/dict.bin 2> /dev/null) <(cat test/test.txt | ./TextMiningApp dict.bin 2> /dev/null) 
+if diff <(cat test/test.txt | ref/TextMiningApp ref/dict.bin 2> /dev/null) <(cat test/test.txt | ./TextMiningApp dict.bin 2> /dev/null) > /dev/null
 then
     test_done=$((test_done + 1))
     echo "[OK]"
