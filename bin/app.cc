@@ -1,9 +1,4 @@
 #include <iostream>
-#include <sys/mman.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include "tries.hh"
 #include "damerau_levenshtein.hh"
 
@@ -16,33 +11,30 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    struct stat sb;
-    int fd = open(argv[1], O_RDONLY);
-    if (fstat(fd, &sb) == -1) {
-        cerr << "TextMiningApp: File Error: The file '" << argv[1] << "' could not be loaded\n";
-        return -1;
-    }
-
-    void* addr = mmap(NULL, sb.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-
-    // -----------------------------
     FILE *fp = fopen(argv[1], "r"); 
     if (fp == NULL) 
     { 
         puts("Could not open file"); 
         return 0; 
-    } 
+    }
+
+    /* Create an empty Trie */
     auto trie = new Trie(false, 0);
+    /* Load the Trie with values in dict.bin */
     trie->deserialize(fp);
     fclose(fp); 
-    // -----------------------------
 
+    /* Read 'approx dist testWord' from stdin */
     string approx, word, dist;
     cin >> approx >> dist >> word;
+    /* The final JSON */
     vector<string> final_res;
+    /* The results for each query */
     vector<tuple<string, unsigned, unsigned>> res;
+    /* Loop for each query */
     while (!cin.eof())
     {
+        /* Get the Damereau Levenshtein distance sorted results */
         res = distance_dl(trie, word, atoi(dist.c_str()));
         for (auto r : res)
         {
@@ -56,13 +48,12 @@ int main(int argc, char **argv)
         cin >> approx >> dist >> word;
     }
     
+    /* Print the final JSON on stdout */
     cout << '[';
     for (auto r : final_res) {
         cout << r;
     }
     cout << ']' << endl;
     
-    munmap(addr, sb.st_size);
-    close(fd);
     return 0;
 }

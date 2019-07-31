@@ -114,11 +114,13 @@ void Trie::print_trie()
     file.close();
 }
 
+/* Dump the Trie into a file */
 void Trie::serialize(FILE *fp, char key)
 {
-    // Else, store current node and recur for its children
+    // If root node: skip writing
     if (key != '\0')
         fprintf(fp, "%c-%u ", key, this->freq); 
+    // Writing key + frequency for each child
     for (auto& child : this->character)
          get<0>(child)->serialize(fp, get<1>(child)); 
   
@@ -126,6 +128,7 @@ void Trie::serialize(FILE *fp, char key)
     fprintf(fp, "%c-%u ", ')', 0); 
 }
 
+/* Load data from file into the Trie */
 int Trie::deserialize(FILE *fp) 
 { 
     // Read next item from file. If theere are no more items or next 
