@@ -7,7 +7,7 @@ printf '\n'
 ref/TextMiningCompiler src/test_words.txt ref/dict.bin > /dev/null
 
 echo "========== TEST $test_total =========="
-cm1='echo "approx 0 test"'
+cm1='echo "approx 0 myfox"'
 echo "=> $cm1"
 if diff <(echo "approx 0 myfox" | ref/TextMiningApp ref/dict.bin 2> /dev/null) <(echo "approx 0 myfox" | TextMiningApp dict.bin 2> /dev/null) > /dev/null
 then
