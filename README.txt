@@ -13,9 +13,10 @@ QUESTIONS:
 
 	2 - Nous avons créé une tests suite comprenant des tests sur le mot testé, la distance et aussi sur le mode d'entrée des tests (echo, cat , ...)
 	
-	3 - 
+	3 - Non
 	
-	4 - 
+	4 - Nous avons utilisé une structure de type TRIE car elle était assez simple à mettre en place et elle permet d'avoir de bonnes performances pour tout
+		ce qui est stockage de mot avec des fréquences données
 	
 	5 - En ajoutant des outils d'analyse contextuel, un réglage automatique de la distance pourrait être mise en place: un exemple simple serait de dire
 		que des mots avec une distance importantes par rapport au mot testé mais avec une similarité importante pourrait être retourné par le programme
