@@ -28,7 +28,6 @@ vector<tuple<string, unsigned, unsigned>> distance_dl(Trie*& t, const string& wo
     if (t == nullptr)
         return results;
 
-    current_row.resize(word.length() + 1);
     for (unsigned i = 0; i <= word.length(); ++i)
         current_row.push_back(i);
 
@@ -71,7 +70,7 @@ vector<tuple<string, unsigned, unsigned>> distance_rec(Trie* t, char c, const st
     vector<unsigned> current_row;
     vector<tuple<string, unsigned, unsigned>> results;
     current_row.push_back(previous_row[0] + 1);
-
+    
     for (unsigned i = 1; i < column; ++i)
     {
 	unsigned insert_dist = current_row[i - 1] + 1;
@@ -92,7 +91,7 @@ vector<tuple<string, unsigned, unsigned>> distance_rec(Trie* t, char c, const st
 
     if (current_row[current_row.size() - 1] <= max_dist && t->isWord)
         results.push_back(make_tuple(current_word, current_row[current_row.size() - 1], t->freq));
-
+    
     if (min(current_row) <= max_dist)
         for (unsigned i = 0; i < t->character.size(); ++i)
 	    merge_vectors(results, distance_rec(get<0>(t->character[i]), get<1>(t->character[i]), word, max_dist, current_row, current_word + get<1>(t->character[i])));
