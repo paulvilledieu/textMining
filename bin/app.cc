@@ -45,15 +45,15 @@ int main(int argc, char **argv)
             s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + to_string(get<2>(r)) + ",\"distance\":" +  to_string(get<1>(r)) + "}";
             final_res.push_back(s);
         }
+        /* Print the final JSON on stdout */
+        cout << '[';
+        for (auto r : final_res) {
+            cout << r;
+        }
+        cout << ']' << endl;
+        final_res.clear();
         cin >> approx >> dist >> word;
     }
-    
-    /* Print the final JSON on stdout */
-    cout << '[';
-    for (auto r : final_res) {
-        cout << r;
-    }
-    cout << ']' << endl;
     
     return 0;
 }

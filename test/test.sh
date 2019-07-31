@@ -111,6 +111,19 @@ test_total=$((test_total + 1))
 printf '\n'
 
 echo "========== TEST $test_total =========="
+cm1='approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test"'
+echo "=> $cm1"
+if diff <(approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test" | ref/TextMiningApp ref/dict.bin 2> /dev/null) <(approx 0 test\napprox 0 test\napprox 0 test\napprox 0 test\napprox 0 test" | ./TextMiningApp dict.bin 2> /dev/null) 
+then
+    test_done=$((test_done + 1))
+    echo "[OK]"
+else
+    echo "[KO]"
+fi
+test_total=$((test_total + 1))
+printf '\n'
+
+echo "========== TEST $test_total =========="
 cm1='echo "approx 0 test\napprox 1 test\napprox 2 test\napprox 3 test\napprox 4 test"'
 echo "=> $cm1"
 if diff <(echo "approx 0 test\napprox 1 test\napprox 2 test\napprox 3 test\napprox 4 test" | ref/TextMiningApp ref/dict.bin 2> /dev/null) <(echo "approx 0 test\napprox 1 test\napprox 2 test\napprox 3 test\napprox 4 test" | ./TextMiningApp dict.bin 2> /dev/null) 

@@ -1,5 +1,5 @@
-echo "approx 0 test"
-echo "approx 1 test"
-echo "approx 2 test"
-echo "approx 3 test"
-echo "approx 4 test"
+approx 0 test
+approx 1 test
+approx 2 test
+approx 3 test
+approx 4 test
