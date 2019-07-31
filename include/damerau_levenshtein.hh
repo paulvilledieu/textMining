@@ -10,4 +10,4 @@ vector<tuple<string, unsigned short, unsigned>> distance_dl(Trie*& t, const stri
 // It takes the current Trie node, the letter, the base word, the maximum distance, the previous row
 // of the matrix and the current word since the root of the Trie
 vector<tuple<string, unsigned short, unsigned>> distance_rec(Trie* t, char c, const string& word,
-		unsigned short max_dist, vector<unsigned short> previous_row, string current_word);
+		unsigned short max_dist, vector<unsigned short> previous_row, string current_word, vector<unsigned short> pre_previous_row);

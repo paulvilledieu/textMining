@@ -46,7 +46,7 @@ vector<tuple<string, unsigned short, unsigned>> distance_dl(Trie*& t, const stri
     {
 	string current_word = "";
         current_word += get<1>(t->character[i]);
-	merge_vectors(results, distance_rec(get<0>(t->character[i]), get<1>(t->character[i]), word, max_dist, current_row, current_word));
+	merge_vectors(results, distance_rec(get<0>(t->character[i]), get<1>(t->character[i]), word, max_dist, current_row, current_word, current_row));
     }
 
     // Lambda used to sort the results
@@ -81,7 +81,7 @@ vector<tuple<string, unsigned short, unsigned>> distance_dl(Trie*& t, const stri
 // The recursive function used to browse all the nodes of the Trie and construct the distance matrix
 // It takes the current Trie node, the letter, the base word, the maximum distance, the previous row
 // of the matrix and the current word since the root of the Trie
-vector<tuple<string, unsigned short, unsigned>> distance_rec(Trie* t, char c, const string& word, unsigned short max_dist, vector<unsigned short> previous_row, string current_word)
+vector<tuple<string, unsigned short, unsigned>> distance_rec(Trie* t, char c, const string& word, unsigned short max_dist, vector<unsigned short> previous_row, string current_word, vector<unsigned short> pre_previous_row)
 {
     //cerr << "letter :" << c << " and current word: " << current_word << " && isWord = " << t->isWord<< " && freq: " << t->freq << endl;
     unsigned short column = word.length() + 1;
@@ -110,7 +110,10 @@ vector<tuple<string, unsigned short, unsigned>> distance_rec(Trie* t, char c, co
 	dist.push_back(delete_dist);
 	dist.push_back(replace_dist);
 
-	// Insert it in the current row of the matrix
+	if (current_word.length() > 1 && i - 1 > 0 && c == word[i - 2] && current_word[current_word.length() - 2] == word[i - 1] && word[i - 1] != c)
+            dist.push_back(pre_previous_row[i - 2] + 1);
+
+        // Insert it in the current row of the matrix
 	current_row.push_back(min(dist));
     }
 
@@ -122,8 +125,9 @@ vector<tuple<string, unsigned short, unsigned>> distance_rec(Trie* t, char c, co
     // on the children
     if (min(current_row) <= max_dist)
         for (unsigned short i = 0; i < t->character.size(); ++i)
-	    merge_vectors(results, distance_rec(get<0>(t->character[i]), get<1>(t->character[i]), word, max_dist, current_row, current_word + get<1>(t->character[i])));
-
+	{
+	    merge_vectors(results, distance_rec(get<0>(t->character[i]), get<1>(t->character[i]), word, max_dist, current_row, current_word + get<1>(t->character[i]), previous_row));
+        }
     // Return the results
     return results;
 }
