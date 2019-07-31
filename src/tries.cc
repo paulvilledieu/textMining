@@ -4,8 +4,8 @@ Trie::Trie(bool isWord, unsigned freq)
 {
     // int character_frequency[41] = ["e", "s", "a", "i", "r", "n", "t", "o", "u", "l", "c", "m", "p", "d", "v", "g", "h", "f", "0", "b", "2", "1", "q", "j", "x", "y", "3", "5", "7", "4", "6", "9", "w", "z", "k", "8", "_", ".", "+", "&", "#"];
 
-    this->isWord = false;
-    this->freq = 0;
+    this->isWord = isWord;
+    this->freq = freq;
 }
 
 Trie::Trie(const string& dictionary_file)

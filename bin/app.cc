@@ -34,7 +34,7 @@ int main(int argc, char **argv)
     } 
     auto trie = new Trie(false, 0);
     trie->deserialize(fp);
-    cerr << get<1>(trie->character[0]) << " " << get<1>(get<0>(trie->character[0])->character[0]) << endl;
+    trie->print_trie();
     fclose(fp); 
     // -----------------------------
 

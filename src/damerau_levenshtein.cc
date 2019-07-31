@@ -24,7 +24,7 @@ vector<tuple<string, unsigned, unsigned>> distance_dl(Trie*& t, const string& wo
 {
     vector<unsigned> current_row;
     vector<tuple<string, unsigned, unsigned>> results;
-    
+   
     if (t == nullptr)
         return results;
 
@@ -66,7 +66,7 @@ vector<tuple<string, unsigned, unsigned>> distance_dl(Trie*& t, const string& wo
 
 vector<tuple<string, unsigned, unsigned>> distance_rec(Trie* t, char c, const string& word, unsigned max_dist, vector<unsigned> previous_row, string current_word)
 {
-    //cerr << "letter :" << c << " and current word: " << current_word << " && isWord = " << t->isWord<< endl;
+    cerr << "letter :" << c << " and current word: " << current_word << " && isWord = " << t->isWord<< " && freq: " << t->freq << endl;
     int column = word.length() + 1;
     vector<unsigned> current_row;
     vector<tuple<string, unsigned, unsigned>> results;
@@ -95,6 +95,8 @@ vector<tuple<string, unsigned, unsigned>> distance_rec(Trie* t, char c, const st
 	cerr << "add to results: " << current_word << " && isWord = " << t->isWord << endl;
         results.push_back(make_tuple(current_word, current_row[current_row.size() - 1], t->freq));
     }
+
+    //cerr << "Trie addr: " << t << " && word: " << word << " && max_dist: " << max_dist << endl; 
     if (min(current_row) <= max_dist)
         for (unsigned i = 0; i < t->character.size(); ++i)
 	    merge_vectors(results, distance_rec(get<0>(t->character[i]), get<1>(t->character[i]), word, max_dist, current_row, current_word + get<1>(t->character[i])));
