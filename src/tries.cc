@@ -116,9 +116,9 @@ void Trie::print_trie()
 
 void Trie::serialize(FILE *fp, char key)
 {
-  
-    // Else, store current node and recur for its children 
-    fprintf(fp, "%c%u", key, this->freq); 
+    // Else, store current node and recur for its children
+    if (key != '\0')
+        fprintf(fp, "%c%u", key, this->freq); 
     for (auto& child : this->character)
          get<0>(child)->serialize(fp, get<1>(child)); 
   
