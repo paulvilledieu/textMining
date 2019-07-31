@@ -14,13 +14,13 @@
 #------>Sort the results    [X]
 #------>Return in JSON      [X]
 #
-# Constraints respected ?   [ ]
-#------>query per second    [ ]
-#------>less than 512Mo ram [ ]
+# Constraints respected ?   [/]
+#------>query per second    [/]
+#------>less than 512Mo ram [X]
 #
 # Tests suite               [X]
 #
-# Comment all the code      [ ]
+# Comment all the code      [X]
 #
 # Full Check of the project [ ]
 # (AUTHORS, README, code, ...)
