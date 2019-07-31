@@ -4,3 +4,7 @@ In order to run the code:
 
 	$ mkdir build && cd build && cmake ..
 	$ make
+
+QUESTIONS:
+
+TO ANSWER

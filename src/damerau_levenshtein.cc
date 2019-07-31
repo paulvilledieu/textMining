@@ -66,6 +66,7 @@ vector<tuple<string, unsigned, unsigned>> distance_dl(Trie*& t, const string& wo
 
 vector<tuple<string, unsigned, unsigned>> distance_rec(Trie* t, char c, const string& word, unsigned max_dist, vector<unsigned> previous_row, string current_word)
 {
+    //cerr << "letter :" << c << " and current word: " << current_word << " && isWord = " << t->isWord<< " && freq: " << t->freq << endl;
     int column = word.length() + 1;
     vector<unsigned> current_row;
     vector<tuple<string, unsigned, unsigned>> results;
