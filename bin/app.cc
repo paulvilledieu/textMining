@@ -41,21 +41,11 @@ int main(int argc, char **argv)
     string approx, word, dist;
     cin >> approx >> dist >> word;
     vector<string> final_res;
-    vector<tuple<string, unsigned, unsigned>> res = distance_dl(trie, word, atoi(dist.c_str()));
-    cerr << res.size() << endl;
-    for (auto r : res)
-    {
-        string s = "";
-        if (final_res.size() != 0) {
-            s += ",";
-        }
-        s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + to_string(get<2>(r)) + ",\"distance\":" +  to_string(get<1>(r)) + "}";
-        final_res.push_back(s);
-    }
+    vector<tuple<string, unsigned, unsigned>> res;
     while (!cin.eof())
     {
-      cin >> approx >> dist >> word;
-      res = distance_dl(trie, word, atoi(dist.c_str()));
+        cerr << approx << " " << dist << " " << word << endl;
+        res = distance_dl(trie, word, atoi(dist.c_str()));
         for (auto r : res)
         {
             string s = "";
@@ -65,6 +55,7 @@ int main(int argc, char **argv)
             s += "{\"word\":\"" + get<0>(r) + "\",\"freq\":" + to_string(get<2>(r)) + ",\"distance\":" +  to_string(get<1>(r)) + "}";
             final_res.push_back(s);
         }
+        cin >> approx >> dist >> word;
     }
     
     cout << '[';
