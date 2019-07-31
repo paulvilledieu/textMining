@@ -10,3 +10,4 @@ TextMiningCompiler
 TextMiningApp
 run.sh
 dict.bin
+.vscode/
