@@ -38,12 +38,11 @@ int main(int argc, char **argv)
     fclose(fp); 
     // -----------------------------
 
-    string approx, word;
-    unsigned dist;
+    string approx, word, dist;
     cin >> approx >> dist >> word;
     vector<string> final_res;
-    vector<tuple<string, unsigned, unsigned>> res = distance_dl(trie, word, dist);
-    cerr << trie->character.size();
+    vector<tuple<string, unsigned, unsigned>> res = distance_dl(trie, word, atoi(dist.c_str()));
+    cerr << res.size() << endl;
     for (auto r : res)
     {
         string s = "";
@@ -56,7 +55,7 @@ int main(int argc, char **argv)
     while (!cin.eof())
     {
       cin >> approx >> dist >> word;
-      res = distance_dl(trie, word, dist);
+      res = distance_dl(trie, word, atoi(dist.c_str()));
         for (auto r : res)
         {
             string s = "";
